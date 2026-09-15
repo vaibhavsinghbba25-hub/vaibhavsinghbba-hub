@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amul Masti — Beat the Heat, One Sip at a Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --cream: #FBF3E4;
+    --indigo: #1D3557;
+    --indigo-deep: #142640;
+    --chili: #C1440E;
+    --turmeric: #E3A83B;
+    --leaf: #556B2F;
+    --ink: #2B2318;
+    --paper: #FFFDF9;
+    --line: rgba(43,35,24,0.14);
+    --radius-sm: 4px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Fraunces', serif;
+    color: var(--indigo-deep);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  a{ color: inherit; }
+
+  img{ max-width: 100%; display:block; }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251,243,228,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 0;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.25rem;
+    color: var(--indigo-deep);
+  }
+
+  .brand .dot{
+    width:10px;height:10px;border-radius:50%;
+    background: var(--chili);
+  }
+
+  .nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+    margin:0; padding:0;
+    font-size:0.95rem;
+    font-weight:500;
+  }
+
+  .nav-links a{
+    text-decoration:none;
+    color: var(--ink);
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .nav-links a:hover{ border-color: var(--chili); }
+
+  .nav-cta{
+    background: var(--indigo-deep);
+    color: var(--paper);
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.9rem;
+    white-space:nowrap;
+  }
+
+  .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--indigo-deep); }
+
+  @media (max-width: 760px){
+    .nav-links{ display:none; }
+    .menu-btn{ display:block; }
+    .nav-cta{ display:none; }
+  }
+
+  .hero{
+    padding: 88px 0 60px;
+    position: relative;
+    overflow:hidden;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items:center;
+  }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+  }
+
+  .eyebrow{
+    color: var(--chili);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    font-weight: 600;
+  }
+
+  .hero p.lede{
+    margin-top: 22px;
+    font-size: 1.15rem;
+    max-width: 46ch;
+    color: #4a4132;
+  }
+
+  .hero-actions{
+    margin-top: 34px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    display:inline-block;
+    padding: 14px 26px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-decoration:none;
+    font-size: 0.98rem;
+    border: 1px solid transparent;
+    cursor:pointer;
+  }
+
+  .btn-primary{
+    background: var(--chili);
+    color: var(--paper);
+  }
+  .btn-primary:hover{ background: #a83a0c; }
+
+  .btn-ghost{
+    background: transparent;
+    color: var(--indigo-deep);
+    border-color: var(--indigo-deep);
+  }
+  .btn-ghost:hover{ background: rgba(29,53,87,0.06); }
+
+  .glass-art{
+    position:relative;
+    aspect-ratio: 4/5;
+    background: linear-gradient(180deg, #fff 0%, #fdf6e8 55%, #f1e2c3 100%);
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .glass{
+    width: 62%;
+    height: 78%;
+    background: linear-gradient(180deg, #fef9ee 0%, #f2e3b8 40%, #e3a83b 100%);
+    border-radius: 6px 6px 30px 30px;
+    position:relative;
+    box-shadow: inset 0 -8px 20px rgba(150,110,20,0.25);
+  }
+
+  .glass::before{
+    content:"";
+    position:absolute;
+    top: 14%;
+    left:8%;
+    right: 8%;
+    height: 6%;
+    background: repeating-linear-gradient(90deg, #556B2F 0 6px, transparent 6px 14px);
+    border-radius: 4px;
+    opacity: 0.85;
+  }
+
+  .glass::after{
+    content:"🌿";
+    position:absolute;
+    top: -34px;
+    right: 14%;
+    font-size: 2rem;
+    transform: rotate(12deg);
+  }
+
+  .float-tag{
+    position:absolute;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(20,38,64,0.08);
+  }
+  .float-tag.one{ top: 18px; left: 18px; }
+  .float-tag.two{ bottom: 26px; right: 18px; }
+
+  .strip{
+    background: var(--indigo-deep);
+    color: var(--cream);
+    padding: 14px 0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .strip-inner{
+    display:inline-block;
+    animation: scroll 22s linear infinite;
+    font-family:'Fraunces', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  .strip-inner span{ margin: 0 28px; opacity: 0.92; }
+  @keyframes scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .strip-inner{ animation: none; }
+  }
+
+  section{ padding: 88px 0; }
+
+  .section-head{
+    max-width: 620px;
+    margin-bottom: 52px;
+  }
+
+  .section-head .eyebrow{ margin-bottom: 12px; }
+
+  .section-head h2{
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    font-weight: 600;
+    line-height:1.2;
+  }
+
+  .section-head p{
+    margin-top: 16px;
+    color: #4a4132;
+    font-size: 1.05rem;
+  }
+
+  .why-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  @media (max-width: 760px){
+    .why-grid{ grid-template-columns: 1fr; }
+  }
+
+  .why-card{
+    background: var(--paper);
+    padding: 34px 30px;
+  }
+
+  .why-num{
+    font-family:'Fraunces', serif;
+    font-size: 0.95rem;
+    color: var(--chili);
+    font-weight:600;
+  }
+
+  .why-card h3{
+    margin-top: 14px;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .why-card p{
+    margin-top: 10px;
+    color: #4a4132;
+    font-size: 0.98rem;
+  }
+
+  .nutri{
+    background: var(--indigo-deep);
+    color: var(--cream);
+    border-radius: 20px;
+  }
+
+  .nutri .wrap{
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .nutri-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items:center;
+  }
+
+  @media (max-width: 860px){
+    .nutri-grid{ grid-template-columns: 1fr; }
+  }
+
+  .nutri h2{ color: var(--cream); }
+
+  .nutri p{ color: rgba(251,243,228,0.78); margin-top: 14px; font-size:1.02rem; }
+
+  .nutri-table{
+    width:100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .nutri-table td{
+    padding: 13px 4px;
+    border-bottom: 1px solid rgba(251,243,228,0.16);
+  }
+  .nutri-table td:last-child{
+    text-align:right;
+    font-weight:600;
+    color: var(--turmeric);
+  }
+  .nutri-note{
+    margin-top: 18px;
+    font-size: 0.8rem;
+    color: rgba(251,243,228,0.55);
+  }
+
+  .serve-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 860px){
+    .serve-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .serve-card{
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 20px;
+    background: var(--paper);
+  }
+
+  .serve-emoji{ font-size: 1.8rem; }
+
+  .serve-card h3{
+    margin-top:14px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .serve-card p{
+    margin-top:8px;
+    font-size: 0.92rem;
+    color: #4a4132;
+  }
+
+  .cta{
+    text-align:center;
+    background: linear-gradient(180deg, #fdf6e8, #f2e3b8);
+    border-radius: 20px;
+    padding: 72px 28px;
+  }
+
+  .cta h2{ font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .cta p{ margin-top: 14px; color:#4a4132; font-size: 1.05rem; }
+  .cta .hero-actions{ justify-content:center; margin-top: 30px; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 44px 0 34px;
+    font-size: 0.88rem;
+    color: #6b6151;
+  }
+
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+
+  .disclaimer{
+    max-width: 640px;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    line-height:1.6;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span> Amul Masti</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#why">Why Masti</a></li>
+        <li><a href="#nutrition">Nutrition</a></li>
+        <li><a href="#serve">Serving Ideas</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#cta">Find a Store</a>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">SPICED BUTTERMILK, THE OLD-FASHIONED WAY</div>
+        <h1>A little masti in&nbsp;every glass of chaas.</h1>
+        <p class="lede">Real curd, churned buttermilk and a pinch of roasted cumin — Amul Masti is the drink that's been cooling down Indian summers since before air conditioning was a given.</p>
+        <div class="hero-actions">
+          <a href="#serve" class="btn btn-primary">See Serving Ideas</a>
+          <a href="#nutrition" class="btn btn-ghost">Check Nutrition</a>
+        </div>
+      </div>
+      <div class="glass-art">
+        <div class="float-tag one">Low fat</div>
+        <div class="float-tag two">Probiotic</div>
+        <div class="glass"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span>REAL CURD</span><span>·</span><span>ROASTED CUMIN</span><span>·</span><span>NO ARTIFICIAL FLAVOURS</span><span>·</span><span>SERVE CHILLED</span><span>·</span>
+      <span>REAL CURD</span><span>·</span><span>ROASTED CUMIN</span><span>·</span><span>NO ARTIFICIAL FLAVOURS</span><span>·</span><span>SERVE CHILLED</span><span>·</span>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">WHY MASTI</div>
+        <h2>Three reasons it disappears from the fridge fast</h2>
+        <p>It's not just a drink — it's the thing that shows up at every lunch table from Ahmedabad to Chennai, for reasons that go beyond nostalgia.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">Digestion</div>
+          <h3>Settles a heavy meal</h3>
+          <p>Traditional chaas has long been the go-to after a rich thali — the probiotics and light spicing help digestion do its job.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">Hydration</div>
+          <h3>Cools faster than water alone</h3>
+          <p>The natural electrolytes in buttermilk replace what a hot afternoon takes out of you — colder, tangier, and more satisfying than plain water.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">Everyday price</div>
+          <h3>A treat, not a splurge</h3>
+          <p>Sold in tetra packs and pouches from ₹10, Masti is priced to be a daily habit, not an occasional indulgence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nutrition">
+    <div class="wrap">
+      <div class="nutri">
+        <div class="wrap">
+          <div class="nutri-grid">
+            <div>
+              <div class="eyebrow" style="color:var(--turmeric);">PER 100 ML</div>
+              <h2>Light enough for a second glass</h2>
+              <p>Amul Masti is formulated to refresh without weighing you down — a fraction of the calories of a soft drink, with none of the sugar crash.</p>
+            </div>
+            <table class="nutri-table">
+              <tr><td>Energy</td><td>29 kcal</td></tr>
+              <tr><td>Total fat</td><td>1.5 g</td></tr>
+              <tr><td>Protein</td><td>1.5 g</td></tr>
+              <tr><td>Carbohydrates</td><td>1.8 g</td></tr>
+              <tr><td>Sodium</td><td>250 mg</td></tr>
+            </table>
+          </div>
+          <div class="nutri-note">Values are indicative and based on publicly listed product information. Always check the pack for the most accurate figures.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="serve">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">SERVING IDEAS</div>
+        <h2>Four ways students actually drink it</h2>
+      </div>
+      <div class="serve-grid">
+        <div class="serve-card">
+          <div class="serve-emoji">🥤</div>
+          <h3>Straight from the fridge</h3>
+          <p>Shake well, pour over ice. Ready in ten seconds flat.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-emoji">🌶️</div>
+          <h3>With extra tadka</h3>
+          <p>A pinch of roasted jeera and black salt on top for extra punch.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-emoji">🍽️</div>
+          <h3>Alongside a thali</h3>
+          <p>The classic pairing — especially after anything fried or spicy.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-emoji">🎒</div>
+          <h3>In the tetra pack</h3>
+          <p>Straw in, backpack pocket, gone before the next lecture starts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="wrap">
+      <div class="cta">
+        <h2>Ready to cool down?</h2>
+        <p>Amul Masti is available at grocery stores, kirana shops and campus canteens nationwide.</p>
+        <div class="hero-actions">
+          <a href="https://www.amul.com/products/amul-masti-butter-milk.php" class="btn btn-primary" target="_blank" rel="noopener">Visit Amul.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="brand"><span class="dot"></span> Amul Masti</div>
+      <div>Made with masti, since forever.</div>
+    </div>
+    <div class="disclaimer">
+      This page is an independent student marketing project created for coursework purposes and is not an official Amul website. "Amul" and "Amul Masti" are trademarks of Gujarat Co-operative Milk Marketing Federation Ltd. Product details are sourced from public listings and may not be fully accurate — always refer to official packaging and the official Amul website for verified information.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
